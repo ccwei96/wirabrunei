@@ -8,27 +8,36 @@
     body {
       margin: 0;
       padding: 20px;
-      height: 100vh; /* 💥 新增：高度锁死 */
-      overflow: hidden; /* 💥 新增：禁止滚动 */
+      height: 100vh; /* 锁死高度 */
+      overflow: hidden; /* 禁止滚动 */
       font-family: 'Arial', sans-serif;
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      background: radial-gradient(ellipse at center, #6a11cb 0%, #2575fc 100%);
-      background-size: 200% 200%;
-      animation: moveGradient 20s ease infinite;
       position: relative;
       text-align: center;
       color: #ffffff;
+      background: #000; /* 背景色以防万一加载失败 */
     }
-    @keyframes moveGradient {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
-    }
-    /* 粒子背景 */
+    /* 背景图片容器 */
     body::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: url('https://i.imgur.com/TxRKald.jpeg') no-repeat center center/cover;
+      z-index: 0;
+      animation: zoomBackground 30s ease-in-out infinite alternate;
+    }
+    @keyframes zoomBackground {
+      0% { transform: scale(1); }
+      100% { transform: scale(1.05); }
+    }
+    /* 背景粒子（在背景图上叠加） */
+    body::after {
       content: "";
       position: absolute;
       width: 300%;
@@ -36,7 +45,7 @@
       background: radial-gradient(circle, rgba(255,255,255,0.2) 1px, transparent 1px);
       background-size: 40px 40px;
       animation: moveStars 120s linear infinite;
-      z-index: 0;
+      z-index: 1;
     }
     @keyframes moveStars {
       0% { transform: translate(0,0); }
@@ -44,7 +53,7 @@
     }
     h1, h2, p, a, img {
       position: relative;
-      z-index: 1;
+      z-index: 2;
     }
     img {
       width: 95%;
@@ -128,20 +137,17 @@
   </style>
 </head>
 <body>
-  <!-- 浮动照片 -->
   <img src="https://i.imgur.com/9APcmSn.jpeg" alt="photo" />
   
   <h1>Alat Salin Nombor Telefon</h1>
   <h2>Mudah dan pantas! 📱</h2>
   <p>Tekan butang di bawah untuk salin nombor telefon anda dengan cepat.</p>
 
-  <!-- 呼吸灯按钮 -->
   <a href="#" id="copyButton">
     Klik untuk Salin
     <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" class="icon" alt="WhatsApp" />
   </a>
 
-  <!-- 叮声音 -->
   <audio id="sound" preload="auto">
     <source src="https://www.myinstants.com/media/sounds/interface.mp3" type="audio/mpeg" />
   </audio>
