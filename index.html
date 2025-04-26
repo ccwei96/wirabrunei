@@ -3,6 +3,7 @@
 <head>
   <title>Alat Salin Nombor Telefon</title>
   <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" /> <!-- 📱 手机适配必加 -->
   <style>
     body {
       margin: 0;
@@ -20,6 +21,7 @@
       text-align: center;
       overflow: hidden;
       position: relative;
+      padding: 20px; /* 手机留白 */
     }
     @keyframes gradientBG {
       0% { background-position: 0% 50%; }
@@ -45,7 +47,8 @@
       z-index: 1;
     }
     img {
-      width: 250px;
+      width: 50%;
+      max-width: 200px;
       border-radius: 15px;
       margin-bottom: 20px;
       box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
@@ -56,20 +59,22 @@
       100% { transform: translateY(-10px); }
     }
     h1 {
-      font-size: 28px;
+      font-size: 24px;
       margin-bottom: 10px;
       text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
     }
     p {
       font-size: 16px;
-      margin-bottom: 30px;
+      margin-bottom: 20px;
       text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.4);
+      max-width: 300px;
+      line-height: 1.4;
     }
     a {
       display: inline-flex;
       align-items: center;
       gap: 10px;
-      padding: 15px 30px;
+      padding: 15px 25px;
       font-size: 18px;
       font-weight: bold;
       color: #ffffff;
@@ -109,8 +114,8 @@
       transform: scale(0.95);
     }
     .icon {
-      width: 24px;
-      height: 24px;
+      width: 22px;
+      height: 22px;
     }
   </style>
 </head>
@@ -133,12 +138,10 @@
   </audio>
 
   <script>
-    const phoneNumber = '+6731234567'; // ✅ 以后只需要改这里！
-
+    const phoneNumber = '+6731234567'; // 只需要改这里
     const button = document.getElementById('copyButton');
     const sound = document.getElementById('sound');
 
-    // 自动把按钮的 href 设置成 tel:电话号码
     button.setAttribute('href', 'tel:' + phoneNumber);
 
     button.addEventListener('click', function(event) {
